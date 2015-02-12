@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
+using System.Threading;
+
 
 namespace ButtonGame
 {
@@ -16,8 +18,8 @@ namespace ButtonGame
         Button[,] buttons = new Button[3, 3];
         Random r = new Random();
         List<Tuple<int, int>> sequence = new List<Tuple<int, int>>();
-        System.Timers.Timer t = new System.Timers.Timer();
-        System.Timers.Timer t2 = new System.Timers.Timer();
+        Button start = new Button();
+        int score = 0;
 
         public Form1()
         {
@@ -35,55 +37,73 @@ namespace ButtonGame
                     //buttons[i,j].Text = "button " + (i + 1) + "," + (j + 1);
                     buttons[i, j].Text = Convert.ToString((i + 1) + "," + (j + 1));
                     buttons[i, j].Click += new EventHandler(this.butt_Click);
-                    buttons[i, j].BackColor = Color.MediumTurquoise;
+                    buttons[i, j].BackColor = Color.FromArgb(111,233,172);
                     this.Controls.Add(buttons[i, j]);    
                 }
             }
-            sequence.Add(new Tuple<int, int>(r.Next(3), r.Next(3)));
-
-            //Creats our timer and it's events
-            t.Interval = 5000;
-            t2.Interval = 7500;
-            t.Enabled = true;
-            t2.Enabled = true;
-            t.Elapsed += TimerEvent;
-            t2.Elapsed += TimerEvent2;
-
+            start = new Button();
+            start.Location = new Point(210, 450);
+            start.Height = 50;
+            start.Width = 100;
+            start.Text = "Start";
+            start.BackColor = Color.FromArgb(111, 233, 172);
+            start.Click += new EventHandler(this.Start_Game);
+            this.Controls.Add(start);
         }
 
-            
+        public void gamePlay()
+        {
+            Console.WriteLine("Start of gamePlay");
+            createSequence();
+            flashing(sequence);
+            Console.WriteLine("flashed");
+        }
+
+        public void createSequence()
+        {
+            sequence.Add(new Tuple<int, int>(r.Next(3), r.Next(3)));
+        }
+
+        public void flashing(List<Tuple<int, int>> sequence)
+        {
+            for (int i = 0; i < sequence.Count; i++)
+            {
+                buttons[sequence[i].Item1, sequence[i].Item2].BackColor = Color.FromArgb(240,96,96);
+                Task.Delay(5000).Wait();
+                buttons[sequence[i].Item1, sequence[i].Item2].BackColor = Color.FromArgb(111, 233, 172);
+                Task.Delay(1000).Wait();
+            }
+        }
+
+        private void Start_Game(object sender, EventArgs e)
+        {
+            gamePlay();
+        }
 
         void butt_Click(object sender, EventArgs e)
         {
             Console.WriteLine(((Button)sender).Text);
-
-            if (((Button)sender) == buttons[sequence[0].Item1, sequence[0].Item2])
+            for (int i = 0; i < sequence.Count; i++)
             {
-                //buttons[r.Next(3), r.Next(3)].BackColor = Color.Red;
-                Console.WriteLine("HIT!");
+                if (((Button)sender) == buttons[sequence[(sequence.Count - 1)].Item1, sequence[(sequence.Count - 1)].Item2])
+                {
+                    Console.WriteLine("The last button is:" + ((Button)sender).Text);
+                    Console.WriteLine("HIT!");
+                    score = score + 1;
+                    Console.WriteLine("Your score is " + score);
+                    gamePlay();
+                }
+                else if (((Button)sender) == buttons[sequence[i].Item1, sequence[i].Item2])
+                {
+                    Console.WriteLine("The button just clicked is:" + ((Button)sender).Text);
+                    Console.WriteLine("HIT!");
+                }
+                else
+                {
+                    Console.WriteLine("The wrong button was clicked:" + ((Button)sender).Text);
+                    Console.WriteLine("MISS!");
+                }
             }
-            else
-                Console.WriteLine("MISSED!");
-        }
-
-        private void TimerEvent(object sender, EventArgs e)
-        {
-            foreach (var element in sequence)
-            {
-                buttons[sequence[0].Item1, sequence[0].Item2].BackColor = Color.Red;
-            }
-            //Stops our button from repeatedly turning Red by ending the timer.
-            t.Stop();
-        }
-
-        private void TimerEvent2(object sender, EventArgs e)
-        {
-            foreach (var element in sequence)
-            {
-                buttons[sequence[0].Item1, sequence[0].Item2].BackColor = Color.MediumTurquoise;
-            }
-            //Stops our button from repeatedly turning turquoise by ending the timer.
-            t2.Stop();
         }
 
 
@@ -94,6 +114,12 @@ namespace ButtonGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void howToPlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This game does xyz", "How to Play", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }
