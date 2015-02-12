@@ -7,12 +7,3 @@ C:\Users\Kimberley\Documents\University\Dundee\2nd year\Computer Systems 2B\New 
 C:\Users\Kimberley\Documents\University\Dundee\2nd year\Computer Systems 2B\New folder\ButtonGame\ButtonGame\bin\Debug\ButtonGame.pdb
 C:\Users\Kimberley\Documents\University\Dundee\2nd year\Computer Systems 2B\New folder\ButtonGame\ButtonGame\obj\Debug\ButtonGame.exe
 C:\Users\Kimberley\Documents\University\Dundee\2nd year\Computer Systems 2B\New folder\ButtonGame\ButtonGame\obj\Debug\ButtonGame.pdb
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\bin\Debug\ButtonGame.exe.config
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.exe
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.pdb
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\bin\Debug\ButtonGame.exe
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\bin\Debug\ButtonGame.pdb
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.csprojResolveAssemblyReference.cache
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.Form1.resources
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.Properties.Resources.resources
-C:\Users\Jamie\Desktop\ComputerSystems\ButtonGame\ButtonGame\obj\Debug\ButtonGame.csproj.GenerateResource.Cache
