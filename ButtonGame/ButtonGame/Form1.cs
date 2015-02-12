@@ -51,21 +51,10 @@ namespace WindowsFormsApplication1
 
         public void gamePlay()
         {
+            Console.WriteLine("Start of gamePlay again");
             createSequence();
-            turnRed(sequence);
-            Console.WriteLine("red");
-         //   wait(5);
-        //    turnBlue(sequence);
-         //  Console.WriteLine("Blue");
-        }
-
-        public void turnRed(List<Tuple<int,int>> sequence){
-            b[sequence[0].Item1, sequence[0].Item2].BackColor = Color.Red;
-        }
-
-        public void turnBlue(List<Tuple<int, int>> sequence)
-        {
-            b[sequence[0].Item1, sequence[0].Item2].BackColor = Color.MediumTurquoise;
+            flashing(sequence);
+            Console.WriteLine("flashed");
         }
 
         public void createSequence()
@@ -73,15 +62,26 @@ namespace WindowsFormsApplication1
             sequence.Add(new Tuple<int, int>(r.Next(3), r.Next(3)));
         }
 
-        public void wait(int NoSecs)
-        {
-            DateTime timeToWait = DateTime.Now.AddSeconds(NoSecs);
-            while (DateTime.Now < timeToWait)
+        public void flashing(List<Tuple<int,int>> sequence){
+            for (int i = 0; i < sequence.Count;i++)
             {
-                Console.WriteLine("waiting..");
+                b[sequence[i].Item1, sequence[i].Item2].BackColor = Color.Red;
+                Task.Delay(5000).Wait();
+                b[sequence[i].Item1, sequence[i].Item2].BackColor = Color.MediumTurquoise;
             }
-            Console.WriteLine("done waiting");
+
         }
+
+
+        //public void wait(int NoSecs)
+        //{
+        //    DateTime timeToWait = DateTime.Now.AddSeconds(NoSecs);
+        //    while (DateTime.Now < timeToWait)
+        //    {
+        //        Console.WriteLine("waiting..");
+        //    }
+        //    Console.WriteLine("done waiting");
+        //}
 
 
         private void Start_Game(object sender, EventArgs e)
@@ -95,13 +95,19 @@ namespace WindowsFormsApplication1
             Console.WriteLine(((Button)sender).Text);
             for (int i = 0; i < sequence.Count; i++)
             {
-                if (((Button)sender) == b[sequence[i].Item1, sequence[i].Item2])
+                if (((Button)sender) == b[sequence[(sequence.Count - 1)].Item1, sequence[(sequence.Count - 1)].Item2])
                 {
                     Console.WriteLine("HIT!");
-                  //  gamePlay();
+                    gamePlay();
+                }
+                else if (((Button)sender) == b[sequence[i].Item1, sequence[i].Item2])
+                {
+                    Console.WriteLine("HIT!");
                 }
                 else
+                {
                     Console.WriteLine("MISS!");
+                }
             }
         }
 
