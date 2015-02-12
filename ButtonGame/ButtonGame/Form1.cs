@@ -19,6 +19,7 @@ namespace WindowsFormsApplication1
         Random r = new Random();
         Button start = new Button();
         List<Tuple<int, int>> sequence = new List<Tuple<int, int>>();
+        int score = 0;
 
         public Form1()
         {
@@ -98,6 +99,8 @@ namespace WindowsFormsApplication1
                 if (((Button)sender) == b[sequence[(sequence.Count - 1)].Item1, sequence[(sequence.Count - 1)].Item2])
                 {
                     Console.WriteLine("HIT!");
+                    score = score + 1;
+                    Console.WriteLine(score);
                     gamePlay();
                 }
                 else if (((Button)sender) == b[sequence[i].Item1, sequence[i].Item2])
